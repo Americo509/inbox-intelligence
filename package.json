@@ -9,6 +9,14 @@
 		"lint:fix": "biome check . --write",
 		"format": "biome format .",
 		"format:write": "biome format . --write",
+		"db:up": "docker compose --env-file .env -f infra/docker-compose.yml up -d",
+		"db:down": "docker compose -f infra/docker-compose.yml down",
+		"db:logs": "docker compose -f infra/docker-compose.yml logs -f --tail=200",
+		"db:reset": "docker compose -f infra/docker-compose.yml down -v",
+		"setup": "pnpm i && pnpm db:up",
+		"dev:web": "turbo run dev --filter=web",
+		"dev:api": "turbo run dev --filter=api",
+		"dev:worker": "turbo run dev --filter=worker",
 		"prepare": "husky",
 		"commit": "cz"
 	},
@@ -20,7 +28,6 @@
 		"cz-conventional-changelog": "^3.3.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.3.1",
-		"prettier": "^3.7.4",
 		"turbo": "^2.8.11",
 		"typescript": "5.9.2"
 	},
