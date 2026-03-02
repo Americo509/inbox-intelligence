@@ -5,8 +5,8 @@
 		"build": "turbo run build",
 		"dev": "turbo run dev",
 		"check-types": "turbo run check-types",
-		"lint": "biome check .",
-		"lint:fix": "biome check . --write",
+		"lint": "biome check apps packages",
+		"lint:fix": "biome check apps packages --write",
 		"format": "biome format .",
 		"format:write": "biome format . --write",
 		"db:up": "docker compose --env-file .env -f infra/docker-compose.yml up -d",
@@ -18,12 +18,17 @@
 		"dev:api": "turbo run dev --filter=@inbox/api",
 		"dev:worker": "turbo run dev --filter=@inbox/worker",
 		"prepare": "husky",
-		"commit": "cz"
+		"commit": "cz",
+		"db:generate": "pnpm -F @inbox/db prisma:generate",
+		"db:migrate:dev": "pnpm -F @inbox/db prisma:migrate:dev",
+		"db:migrate:deploy": "pnpm -F @inbox/db prisma:migrate:deploy",
+		"db:studio": "pnpm -F @inbox/db prisma:studio"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.5",
 		"@commitlint/cli": "^20.4.2",
 		"@commitlint/config-conventional": "^20.4.2",
+		"@types/node": "^25.3.3",
 		"commitizen": "^4.3.1",
 		"cz-conventional-changelog": "^3.3.0",
 		"husky": "^9.1.7",
@@ -44,5 +49,11 @@
 		"commitizen": {
 			"path": "cz-conventional-changelog"
 		}
+	},
+	"dependencies": {
+		"@prisma/adapter-pg": "^7.4.2",
+		"@prisma/client": "^7.4.2",
+		"dotenv": "^17.3.1",
+		"pg": "^8.19.0"
 	}
 }
