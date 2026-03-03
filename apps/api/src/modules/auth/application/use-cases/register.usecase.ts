@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import * as argon2 from "argon2";
 import { Role } from "../../domain/enums/role.enum";
 import type { AuthUser } from "../../domain/models/auth-user.model";
-import type {
-	CreateUserInput,
+import { PasswordHasherPort } from "../ports/password-hasher.port";
+import {
+	type CreateUserInput,
 	UserRepositoryPort,
 } from "../ports/user-repository.port";
 
@@ -19,30 +20,35 @@ export interface RegisterInput {
 
 @Injectable()
 export class RegisterUseCase {
-	constructor(private readonly userRepository: UserRepositoryPort) {}
+	constructor(
+		@Inject(UserRepositoryPort)
+		private readonly users: UserRepositoryPort,
+
+		@Inject(PasswordHasherPort)
+		private readonly hasher: PasswordHasherPort,
+	) {}
 
 	async register(input: RegisterInput): Promise<AuthUser> {
 		// validate if the user already exists
-		const existingUser = await this.userRepository.findByCpf(input.cpf);
+		const existingUser = await this.users.findByCpf(input.cpf);
 		if (existingUser) {
 			throw new Error("User already exists");
 		}
 
 		// Hash the password before saving it to the database
-		const passwordHash = await this.hashPassword(input.password);
+		const passwordHash = await this.hasher.hash(input.password);
 
 		const toCreate: CreateUserInput = {
 			email: input.email,
 			username: input.username,
 			cpf: input.cpf,
 			name: input.name,
-			birthdate: input.birthdate,
-			gender: input.gender,
 			passwordHash,
 			role: Role.USER, // Default role for new users
+			tenantId: "default", // You might want to assign a default tenant or handle this differently
 		};
 
-		const user = await this.userRepository.create(toCreate);
+		const user = await this.users.create(toCreate);
 		return user;
 	}
 

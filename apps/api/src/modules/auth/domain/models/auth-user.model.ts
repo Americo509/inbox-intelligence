@@ -3,4 +3,5 @@ export interface AuthUser {
 	cpf: string;
 	passwordHash: string;
 	role: string;
+	tenantId: string;
 }

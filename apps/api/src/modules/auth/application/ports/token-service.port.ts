@@ -2,6 +2,7 @@ export interface TokenPayload {
 	sub: number;
 	cpf: string;
 	role: string;
+	tenantId: string;
 }
 
 export abstract class TokenServicePort {

@@ -58,6 +58,7 @@ export class RefreshTokenUseCase {
 			sub: user.id,
 			cpf: user.cpf,
 			role: user.role,
+			tenantId: user.tenantId,
 		});
 
 		return { accessToken, refreshToken: newRefreshToken };
