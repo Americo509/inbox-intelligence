@@ -6,10 +6,9 @@ export interface UserEntity {
 	username: string;
 	cpf: string;
 	name: string;
-	birthdate: Date;
-	gender: string;
 	passwordHash: string;
 	role: string;
+	tenantId: string;
 }
 
 export interface CreateUserInput {
@@ -17,10 +16,9 @@ export interface CreateUserInput {
 	username: string;
 	cpf: string;
 	name: string;
-	birthdate: Date;
-	gender: string;
 	passwordHash: string;
 	role: string;
+	tenantId: string;
 }
 
 export abstract class UserRepositoryPort {

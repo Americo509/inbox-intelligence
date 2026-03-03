@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -16,7 +15,12 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
 		});
 	}
 
-	async validate(payload: any) {
-		return await payload;
+	validate(payload: any) {
+		return {
+			userId: payload.sub,
+			cpf: payload.cpf,
+			role: payload.role,
+			tenantId: payload.tenantId,
+		};
 	}
 }

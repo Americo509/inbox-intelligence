@@ -23,6 +23,7 @@ export class PrismaUserRepository implements UserRepositoryPort {
 				cpf: true,
 				passwordHash: true,
 				role: true,
+				tenantId: true,
 			},
 		});
 
@@ -32,6 +33,7 @@ export class PrismaUserRepository implements UserRepositoryPort {
 			cpf: user.cpf,
 			passwordHash: user.passwordHash,
 			role: user.role,
+			tenantId: user.tenantId,
 		};
 	}
 
@@ -43,6 +45,7 @@ export class PrismaUserRepository implements UserRepositoryPort {
 				cpf: true,
 				passwordHash: true,
 				role: true,
+				tenantId: true,
 			},
 		});
 
@@ -53,6 +56,7 @@ export class PrismaUserRepository implements UserRepositoryPort {
 			cpf: user.cpf,
 			passwordHash: user.passwordHash,
 			role: user.role,
+			tenantId: user.tenantId,
 		};
 	}
 
@@ -64,12 +68,14 @@ export class PrismaUserRepository implements UserRepositoryPort {
 				cpf: input.cpf,
 				passwordHash: input.passwordHash,
 				role: input.role,
+				tenantId: input.tenantId,
 			},
 			select: {
 				id: true,
 				email: true,
 				passwordHash: true,
 				role: true,
+				tenantId: true,
 			},
 		});
 
@@ -80,9 +86,8 @@ export class PrismaUserRepository implements UserRepositoryPort {
 			username: input.username,
 			cpf: input.cpf,
 			name: input.name,
-			birthdate: input.birthdate,
-			gender: input.gender,
 			role: user.role,
+			tenantId: user.tenantId,
 		};
 	}
 }

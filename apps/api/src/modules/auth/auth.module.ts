@@ -42,6 +42,12 @@ import { JwtStrategy } from "./presentation/http/strategies/jwt.strategy";
 		},
 	],
 	controllers: [AuthController],
-	exports: [RegisterUseCase, LoginUseCase],
+	exports: [
+		PrismaService,
+		UserRepositoryPort,
+		RefreshSessionRepositoryPort,
+		PasswordHasherPort,
+		TokenServicePort,
+	],
 })
 export class AuthModule {}

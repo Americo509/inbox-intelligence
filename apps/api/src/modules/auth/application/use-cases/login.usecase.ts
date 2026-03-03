@@ -39,6 +39,7 @@ export class LoginUseCase {
 			sub: user.id,
 			cpf: user.cpf,
 			role: user.role,
+			tenantId: user.tenantId,
 		});
 
 		return { accessToken, refreshToken };
