@@ -1,0 +1,32 @@
+{
+	"name": "@inbox/db",
+	"version": "0.0.0",
+	"private": true,
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "tsup",
+		"lint": "eslint .",
+		"prisma:generate": "prisma generate --schema ./prisma/schema.prisma",
+		"prisma:migrate:dev": "prisma migrate dev --schema ./prisma/schema.prisma",
+		"prisma:migrate:deploy": "prisma migrate deploy --schema ./prisma/schema.prisma",
+		"prisma:studio": "prisma studio --schema ./prisma/schema.prisma"
+	},
+	"dependencies": {
+		"@prisma/client": "^5.22.0"
+	},
+	"devDependencies": {
+		"@nestjs/common": "^11.0.1",
+		"@types/node": "^25.3.3",
+		"dotenv-cli": "^11.0.0",
+		"prisma": "^5.22.0",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3"
+	}
+}
